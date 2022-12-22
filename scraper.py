@@ -1,8 +1,6 @@
-import re
 import time
 import requests, pprint
 from bs4 import BeautifulSoup
-from bs4.element import Comment
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -29,8 +27,9 @@ def parse_website(url: str, dyn: bool) -> str:
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         driver = webdriver.Chrome(
-            ChromeDriverManager().install(),
-            chrome_options=options
+            # Try commenting/uncommenting the following if you get webdriver errors
+            # ChromeDriverManager().install(),
+            options=options
         )
         time.sleep(8)
         driver.get(url)
