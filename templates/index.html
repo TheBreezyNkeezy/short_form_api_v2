@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        .centered {
+            position: relative;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            color: white;
+        }
+
+        .header {
+            color: black;
+        }
+
+        a {
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        p {
+            color: #111;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 24px;
+            margin: 0 0 24px;
+            text-justify: inter-word;
+        }
+
+        h1 {
+            color: #111;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        h2 {
+            color: #111;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        #demo {
+            color: #111;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 22px;
+            line-height: 24px;
+            margin: 0 0 24px;
+            text-justify: inter-word;
+        }
+
+        #summtable {
+            font-family: 'Helvetica Neue', sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #summtable td {
+            border: 1px solid #111;
+            padding: 8px;
+        }
+
+        .form-div {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="centered">
+            <div class="text-center text-white">
+                <title>AI text summarizers for postcards!</title>
+            </div>
+            <h1 class="header">AI text summarizers for postcards!</h1>
+            <p class="desc">
+                Type a sentence, click on the submit button and wait for your prediction.
+            </p>
+            <form method="POST" onSubmit="return validate();" class="form">
+                <div class="form-div">
+                    <input type="text" name="url" class="form-control mr-2" />
+                    <button type="submit" class="btn btn-outline-primary" onclick="this.form.submit();">
+                        Submit
+                    </button>
+                </div>
+            </form>
+            <br />
+            {% if postcard_link is defined %}
+            <h2 class="header">Postcard link:</h2>
+            <p class="desc">
+                <b>Here is a postcard generated from the summaries down below:</b>
+                <br />
+                <a href="{{ postcard_link }}">{{ postcard_link }}</a>
+            </p>
+            {% endif %}
+            <br />
+            {% if passage is defined %}
+            <h2 class="header">Original passage:</h2>
+            <p class="desc">{{ passage }}</p>
+            {% endif %}
+            {% if freq_summary is defined %}
+            <h2 class="header">Frequency sum summarizer result:</h2>
+            <p class="desc">{{ freq_summary }}</p>
+            {% endif %}
+            {% if tf_summary is defined %}
+            <h2 class="header">TF-IDF summarizer result:</h2>
+            <p class="desc">{{ tf_summary }}</p>
+            {% endif %}
+            {% if openai_summaries is defined %}
+            <h2 class="header">OpenAI summarizer results:</h2>
+            <table id="summtable">
+                {%- for group in openai_summaries %}
+                <tr>
+                    {%- for summary in group %}
+                    <td>
+                        <p class="desc">{{ summary }}</p>
+                    </td>
+                    {%- endfor %}
+                </tr>
+                {%- endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
