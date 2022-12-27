@@ -1,4 +1,5 @@
 # short_form_api_v2
+A new short form summary generator for Lob postcards, using OpenAI.
 ## Setting up .env file for run
 Use the following template to configure the environment:
 ```
