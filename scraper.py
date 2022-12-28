@@ -26,6 +26,7 @@ def parse_website(url: str, dyn: bool) -> str:
     if dyn == "dyn":
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
+        options.add_argument('--no-sandbox')     
         driver = webdriver.Chrome(
             # Try commenting/uncommenting the following if you get webdriver errors
             ChromeDriverManager().install(),
