@@ -74,6 +74,11 @@ def index_post():
         lob_back_summ = values[f"openai_summ_group_0"][idx_4]
     lob_front_html = "<html style='padding: 1in; font-size: 15;'>{{lob_front_summ}}</html>"
     lob_back_html = "<html style='padding: 1in; font-size: 8;'>{{lob_back_summ}}</html>"
+    '''
+    POST call to Lob API to create postcard
+    Originally tried to use Lob Python SDK v5, but failed compared to v4 SDK
+    due to lack of JSON response return values
+    '''
     payload = {
         "description": "short_form_api postcard",
         "front": lob_front_html,
@@ -99,11 +104,6 @@ def index_post():
             "lob_back_summ": lob_back_summ
         }
     }
-    '''
-    POST call to Lob API to create postcard
-    Originally tried to use Lob Python SDK v5, but failed compared to v4 SDK
-    due to lack of JSON response return values
-    '''
     headers = {
         'Authorization': 'Basic dGVzdF80MWZlZjZjMGVkNmRiYWU0NzhiZTBkZTEyNDdkNGNhNmZjMTo=',
         'Content-Type': 'application/json'
@@ -115,7 +115,6 @@ def index_post():
         auth = (username, '')
     ).json()
     postcard_link = postcard["url"]
-    print(postcard_link)
     return render_template(
         'index.html',
         passage = passage,
@@ -172,6 +171,11 @@ def summarize():
         lob_back_summ = values[f"openai_summ_group_0"][idx_4]
     lob_front_html = "<html style='padding: 1in; font-size: 15;'>{{lob_front_summ}}</html>"
     lob_back_html = "<html style='padding: 1in; font-size: 8;'>{{lob_back_summ}}</html>"
+    '''
+    POST call to Lob API to create postcard
+    Originally tried to use Lob Python SDK v5, but failed compared to v4 SDK
+    due to lack of JSON response return values
+    '''
     payload = {
         "description": "short_form_api postcard",
         "front": lob_front_html,
@@ -197,11 +201,6 @@ def summarize():
             "lob_back_summ": lob_back_summ
         }
     }
-    '''
-    POST call to Lob API to create postcard
-    Originally tried to use Lob Python SDK v5, but failed compared to v4 SDK
-    due to lack of JSON response return values
-    '''
     headers = {
         'Authorization': 'Basic dGVzdF80MWZlZjZjMGVkNmRiYWU0NzhiZTBkZTEyNDdkNGNhNmZjMTo=',
         'Content-Type': 'application/json'
