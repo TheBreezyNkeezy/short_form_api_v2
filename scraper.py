@@ -28,7 +28,7 @@ def parse_website(url: str, dyn: bool) -> str:
         options.add_argument('headless')
         driver = webdriver.Chrome(
             # Try commenting/uncommenting the following if you get webdriver errors
-            # ChromeDriverManager().install(),
+            ChromeDriverManager().install(),
             options=options
         )
         time.sleep(8)
