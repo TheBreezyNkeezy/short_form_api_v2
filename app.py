@@ -3,7 +3,7 @@ import os
 import json
 import openai
 import random
-import pprint
+import logging
 import requests
 # import lob_python
 # from lob_python.exceptions import ApiException
@@ -25,6 +25,7 @@ username = os.getenv('LOB_API_KEY')
 # configuration = lob_python.Configuration(
 #     username = os.getenv('LOB_API_KEY')
 # )
+logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.INFO)
 
 MAX_TOKEN_COUNTS = 4096
 
@@ -40,9 +41,16 @@ def index():
 @app.route("/", methods=["POST"])
 def index_post():
     url = request.form["url"]
+    logging.info(f"Scraping and parsing text from: {url} ...")
     passage = scraper.parse_website(url, "dyn")
+    logging.info("Scraping and parsing complete.")
+    logging.info("Creating freq_add summary ...")
     freq_summary = freq_add_summarizer(passage)
+    logging.info("Creating freq_add summary complete.")
+    logging.info("Creating tf_idf summary ...")
     tf_summary = tf_idf_summarizer(passage)
+    logging.info("Creating tf_idf summary complete.")
+    logging.info("Creating OpenAI summaries ...")
     sentences = passage.split('.')
     values = {}
     num_openai_summ = 3
@@ -62,6 +70,8 @@ def index_post():
         )
         values[f"openai_summ_group_{i}"] = [summ["text"] for summ in openai_summary["choices"]]
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
+    logging.info("Creating OpenAI summaries complete.")
+    logging.info("Creating Lob postcard ...")
     lob_front_summ = ""
     lob_back_summ = ""
     idx_3, idx_4 = random.sample(range(0, num_openai_summ), 2)
@@ -114,6 +124,7 @@ def index_post():
         json = json.dumps(payload),
         auth = (username, '')
     ).json()
+    logging.info(f"Postcard response: {postcard}")
     postcard_link = postcard["url"]
     return render_template(
         'index.html',
@@ -135,9 +146,16 @@ def summarize():
     url = request.form["url"]
     dyn = request.form["dyn"]
     num_openai_summ = int(request.form["summaries"])
+    logging.info(f"Scraping and parsing text from: {url}")
     text = scraper.parse_website(url, dyn)
+    logging.info(f"Scraping and parsing complete.")
+    logging.info("Creating freq_add summary ...")
     freq_summary = freq_add_summarizer(text)
+    logging.info("Creating freq_add summary complete.")
+    logging.info("Creating tf_idf summary ...")
     tf_summary = tf_idf_summarizer(text)
+    logging.info("Creating tf_idf summary complete.")
+    logging.info("Creating OpenAI summaries ...")
     values = {}
     values['passage'] = text
     values['freq_summ'] = freq_summary
@@ -159,6 +177,8 @@ def summarize():
         )
         values[f"openai_summ_group_{i}"] = [summ["text"] for summ in openai_summary["choices"]]
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
+    logging.info("Creating OpenAI summaries complete.")
+    logging.info("Creating Lob postcard ...")
     lob_front_summ = ""
     lob_back_summ = ""
     idx_3, idx_4 = random.sample(range(0, num_openai_summ), 2)
@@ -211,6 +231,7 @@ def summarize():
         json = json.dumps(payload),
         auth = (username, '')
     ).json()
+    logging.info(f"Postcard response: {values['postcard']}")
     return values
 
     # postcard_config = PostcardEditable(
