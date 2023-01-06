@@ -5,6 +5,7 @@ import openai
 import random
 import logging
 import requests
+import threading
 # import lob_python
 # from lob_python.exceptions import ApiException
 # from lob_python.model.postcard_editable import PostcardEditable
@@ -34,6 +35,20 @@ MAX_TOKEN_COUNTS = 4096
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+def openai_summarizer(text, summaries, results):
+    openai_prompt = text + "\n\nTl;dr"
+    openai_summary = openai.Completion.create(
+        model="text-davinci-002",
+        prompt=openai_prompt,
+        n=summaries,
+        temperature=0.7,
+        max_tokens=150,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    results.append([summ["text"] for summ in openai_summary["choices"]])
+
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
@@ -56,19 +71,19 @@ def index_post():
     num_openai_summ = 3
     # Split into groups of 100 sentences in order to fit model token constraints
     openai_prompts = [" ".join(sentences[i:i+100]) for i in range(0, len(sentences), 100)]
-    for i, prompt in enumerate(openai_prompts):
-        openai_prompt = prompt + "\n\nTl;dr"
-        openai_summary = openai.Completion.create(
-            model="text-davinci-002",
-            prompt=openai_prompt,
-            n=num_openai_summ,
-            temperature=0.7,
-            max_tokens=150,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=0.0
+    threads = []
+    results = []
+    for prompt in openai_prompts:
+        thread = threading.Thread(
+            target=openai_summarizer,
+            args=[prompt, num_openai_summ, results]
         )
-        values[f"openai_summ_group_{i}"] = [summ["text"] for summ in openai_summary["choices"]]
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
+    for i, result in enumerate(results):
+        values[f"openai_summ_group_{i}"] = result
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
     logging.info("Creating OpenAI summaries complete.")
     logging.info("Creating Lob postcard ...")
@@ -163,19 +178,19 @@ def summarize():
     sentences = text.split('.')
     # Split into groups of 100 sentences in order to fit model token constraints
     openai_prompts = [" ".join(sentences[i:i+100]) for i in range(0, len(sentences), 100)]
-    for i, prompt in enumerate(openai_prompts):
-        openai_prompt = prompt + "\n\nTl;dr"
-        openai_summary = openai.Completion.create(
-            model="text-davinci-002",
-            prompt=openai_prompt,
-            n=num_openai_summ,
-            temperature=0.7,
-            max_tokens=150,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=0.0
+    threads = []
+    results = []
+    for prompt in openai_prompts:
+        thread = threading.Thread(
+            target=openai_summarizer,
+            args=[prompt, num_openai_summ, results]
         )
-        values[f"openai_summ_group_{i}"] = [summ["text"] for summ in openai_summary["choices"]]
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
+    for i, result in enumerate(results):
+        values[f"openai_summ_group_{i}"] = result
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
     logging.info("Creating OpenAI summaries complete.")
     logging.info("Creating Lob postcard ...")
