@@ -31,9 +31,8 @@ def parse_website(url: str, dyn: bool) -> str:
             # ChromeDriverManager().install(),
             options=options
         )
-        time.sleep(8)
         driver.get(url)
-        time.sleep(10)
+        time.sleep(1)
         soup = BeautifulSoup(driver.page_source, "lxml")
         passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6'])
         result = " ".join(
