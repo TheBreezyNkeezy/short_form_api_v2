@@ -56,8 +56,12 @@ def index():
 @app.route("/", methods=["POST"])
 def index_post():
     url = request.form["url"]
+    dyn = request.form["dyn"]
+    size = request.form["size"]
+    front_html = request.files["front"].read().decode("utf-8")
+    back_html = request.files["back"].read().decode("utf-8")
     logging.info(f"Scraping and parsing text from: {url} ...")
-    passage = scraper.parse_website(url, "dyn")
+    passage = scraper.parse_website(url, dyn)
     logging.info("Scraping and parsing complete.")
     logging.info("Creating freq_add summary ...")
     freq_summary = freq_add_summarizer(passage)
@@ -97,8 +101,6 @@ def index_post():
     else:
         lob_front_summ = values[f"openai_summ_group_0"][idx_3]
         lob_back_summ = values[f"openai_summ_group_0"][idx_4]
-    lob_front_html = "<html style='padding: 1in; font-size: 15;'>{{lob_front_summ}}</html>"
-    lob_back_html = "<html style='padding: 1in; font-size: 8;'>{{lob_back_summ}}</html>"
     '''
     POST call to Lob API to create postcard
     Originally tried to use Lob Python SDK v5, but failed compared to v4 SDK
@@ -106,8 +108,8 @@ def index_post():
     '''
     payload = {
         "description": "short_form_api postcard",
-        "front": lob_front_html,
-        "back": lob_back_html,
+        "front": front_html,
+        "back": back_html,
         "to": {
             "name": "Josh Nkoy",
             "address_line1": "210 King Street",
@@ -127,12 +129,14 @@ def index_post():
         "merge_variables": {
             "lob_front_summ": lob_front_summ,
             "lob_back_summ": lob_back_summ
-        }
+        },
+        "size": size
     }
     headers = {
         'Authorization': 'Basic dGVzdF80MWZlZjZjMGVkNmRiYWU0NzhiZTBkZTEyNDdkNGNhNmZjMTo=',
         'Content-Type': 'application/json'
     }
+    logging.info("Calling Lob API")
     postcard = requests.post(
         url = "https://api.lob.com/v1/postcards",
         headers = headers,
@@ -240,6 +244,7 @@ def summarize():
         'Authorization': 'Basic dGVzdF80MWZlZjZjMGVkNmRiYWU0NzhiZTBkZTEyNDdkNGNhNmZjMTo=',
         'Content-Type': 'application/json'
     }
+    logging.info("Calling Lob API")
     values["postcard"] = requests.post(
         url = "https://api.lob.com/v1/postcards",
         headers = headers,
