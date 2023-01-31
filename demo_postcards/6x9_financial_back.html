@@ -1,0 +1,186 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <title>Lob 6x9 Postcard Back</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    @font-face {
+      font-family: "OpenSans-Bold";
+      src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Bold.ttf) format("truetype");
+    }
+
+    @font-face {
+      font-family: "OpenSans-Regular";
+      src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Regular.ttf) format("truetype");
+    }
+
+    body {
+      width: 9.25in;
+      height: 6.25in;
+      margin: 0;
+      padding: 0;
+      /* If using an image, the background image should have dimensions of 2775x1875 pixels. */
+      /* background-image: url(https://s3-us-west-2.amazonaws.com/public.lob.com/assets/desert.jpg); */
+      background-size: 9.25in 6.25in;
+      background-repeat: no-repeat;
+    }
+
+    .var-image-1 {
+      position: absolute;
+      width: 3.0913in;
+      height: 2.1032in;
+      left: -0.0035in;
+      top: -.0035in;
+      object-fit: cover;
+    }
+
+    .var-image-2 {
+      position: absolute;
+      width: 3.0913in;
+      height: 2.1032in;
+      left: 3.0776in;
+      top: -.0035in;
+      object-fit: cover;
+    }
+
+    .var-image-3 {
+      position: absolute;
+      width: 3.0913in;
+      height: 2.1032in;
+      left: 6.1587in;
+      top: -.0035in;
+      object-fit: cover;
+    }
+
+    .header {
+      position: absolute;
+      width: 4.1854in;
+      height: 0.4096in;
+      left: .4475in;
+      top: 2.3336in;
+      font-family: "OpenSans-Bold";
+      font-size: 15pt;
+      line-height: 17pt;
+    }
+
+    .var-image-4 {
+      position: absolute;
+      width: 2.6011in;
+      height: 1.611in;
+      left: .6398in;
+      top: 2.9306in;
+      -webkit-transform: rotate(-9deg);
+      -moz-transform: rotate(-9deg);
+      -o-transform: rotate(-9deg);
+      -ms-transform: rotate(-9deg);
+      transform: rotate(-9deg);
+    }
+
+    .logo-image {
+      position: absolute;
+      width: .2165in;
+      height: .5593in;
+      left: .9029in;
+      top: 4.91in;
+    }
+
+    .logo-text {
+      position: absolute;
+      width: .9338in;
+      height: .2975in;
+      left: 1.1456in;
+      top: 5.0405in;
+    }
+
+    .qr {
+      position: absolute;
+      width: .5837in;
+      height: .5837in;
+      left: 2.5616in;
+      top: 4.9028in;
+    }
+
+    .cta {
+      position: absolute;
+      width: 1.4198in;
+      height: .6077in;
+      left: 3.2035in;
+      top: 4.95in;
+      font-family: "Open Sans";
+      font-size: 10.491pt;
+      line-height: 12.589pt;
+    }
+
+    .text {
+      position: absolute;
+      width: 4.2031in;
+      height: .4844in;
+      left: .4298in;
+      top: 5.5478in;
+      font-family: "Open Sans";
+      font-size: 7.493pt;
+      line-height: 8.992pt;
+    }
+
+    .postage {
+      position: absolute;
+      width: 4in;
+      height: 2.375in;
+      left: 4.975in;
+      top: 3.625in;
+      /* background-color: pink; */
+    }
+
+    #safe-area {
+      position: absolute;
+      width: 8.875in;
+      height: 5.875in;
+      left: 0.1875in;
+      top: 0.1875in;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    #ink-free {
+      position: absolute;
+      width: 4in;
+      height: 2.375in;
+      left: 4.975in;
+      top: 3.625in;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="var-image-1"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/sunset.jpg">
+  <img class="var-image-2"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/shopping.jpg">
+  <img class="var-image-3"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/friends.jpg">
+  <div class="header">{{lob_back_summ}}</div>
+  <img class="logo-image"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/lighthouse_logo.png">
+  <img class="logo-text"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/logo_text.png">
+  <img class="qr"
+    src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/qr.png">
+  <div class="cta">Scan with<br> your phone<br> to apply!</div>
+  <div class="text">Pudam que istia conseque reces inus, es cum vellorum quod utae <br>quiandis susciet vitiam re,
+    commolu ptataquiduci repudita num labo.</div>
+  <div class="postage"></div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/upf7led.css">
+  <title>Lob.com Sample 6x9 Postcard Front</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    @font-face {
+      font-family: "OpenSans-Bold";
+      src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Bold.ttf) format("truetype");
+    }
+
+    @font-face {
+      font-family: "OpenSans-Regular";
+      src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Regular.ttf) format("truetype");
+    }
+
+    @font-face {
+      font-family: "zooja-pro";
+      src: url(https://use.typekit.net/af/a6b776/00000000000000007735c808/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2");
+    }
+
+    body {
+      width: 9.25in;
+      height: 6.25in;
+      margin: 0;
+      padding: 0;
+      /* If using an image, the background image should have dimensions of 2775x1875 pixels. */
+      /* background-image: url(https://s3-us-west-2.amazonaws.com/public.lob.com/assets/desert.jpg); */
+      background-size: 9.25in 6.25in;
+      background-repeat: no-repeat;
+      background-color: #fe6a2c;
+    }
+
+    .header {
+      position: absolute;
+      width: 4.0222in;
+      height: 1.3822in;
+      left: 0.2895in;
+      top: 0.36in;
+      font-family: "zooja-pro";
+      font-size: 50.182pt;
+      line-height: 48pt;
+      color: white;
+      text-align: center;
+    }
+
+    .text {
+      position: absolute;
+      width: 4.0222in;
+      height: 0.6874in;
+      left: .2985in;
+      top: 2.0135in;
+      font-family: "Open Sans";
+      font-size: 13pt;
+      line-height: 16pt;
+      color: white;
+      text-align: center;
+      padding-top: 6pt;
+    }
+
+    .text-highlight {
+      font-family: "OpenSans-Bold";
+    }
+
+    .offer1 {
+      position: absolute;
+      width: 3.2376in;
+      height: 0.479in;
+      left: .6908in;
+      top: 3.0363in;
+      font-family: "Open Sans";
+      font-size: 13.309pt;
+      line-height: 15.971pt;
+      color: white;
+      text-align: center;
+      padding-top: 5pt;
+    }
+
+    .offer2 {
+      position: absolute;
+      width: 3.2376in;
+      height: 0.479in;
+      left: 0.6908in;
+      top: 3.7063in;
+      font-family: "Open Sans";
+      font-size: 13.309pt;
+      line-height: 15.971pt;
+      color: white;
+      text-align: center;
+      padding-top: 5pt;
+    }
+
+    .offer3 {
+      position: absolute;
+      width: 3.2376in;
+      height: 0.479in;
+      left: 0.6908in;
+      top: 4.3762in;
+      font-family: "Open Sans";
+      font-size: 13.309pt;
+      line-height: 15.971pt;
+      color: white;
+      text-align: center;
+      padding-top: 5pt;
+    }
+
+    .highlight {
+      font-family: "OpenSans-Bold";
+      font-size: 28.282pt;
+      line-height: 33.939pt;
+      color: white;
+    }
+
+    .cta {
+      position: absolute;
+      width: 4.0222in;
+      height: 0.5019in;
+      left: 0.2985in;
+      top: 5.3023in;
+      font-family: "Open Sans";
+      font-size: 14.384pt;
+      line-height: 17.261pt;
+      color: white;
+      text-align: center;
+    }
+
+    .cta-highlight {
+      font-family: "OpenSans-Bold";
+      font-size: 14.384pt;
+      line-height: 17.261pt;
+      color: white;
+    }
+
+    .var-image-1 {
+      position: absolute;
+      width: 4.7187in;
+      height: 6.25in;
+      left: 4.5313in;
+      top: 0in;
+      object-fit: cover;
+      background-image: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/tron-le-JsuBKjHGDMM-unsplash.jpg);
+      background-size: auto 6.25in;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .line-1 {
+      position: absolute;
+      width: 3.3059in;
+      left: .7477in;
+      top: 1.8268in;
+      color: white;
+      height: .7pt;
+      border-width: 0px;
+      background-color: white;
+    }
+
+    .line-2 {
+      position: absolute;
+      width: 2.233in;
+      left: 1.1791in;
+      top: 3.5803in;
+      color: white;
+      height: .7pt;
+      border-width: 0px;
+      background-color: white;
+    }
+
+    .line-3 {
+      position: absolute;
+      width: 1.4645in;
+      left: 1.5733in;
+      top: 4.2444in;
+      color: white;
+      height: .7pt;
+      border-width: 0px;
+      background-color: white;
+    }
+
+    #safe-area {
+      position: absolute;
+      width: 8.875in;
+      height: 5.875in;
+      left: 0.1875in;
+      top: 0.1875in;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">Your adventure begins here.</div>
+  <div class="text">{{lob_front_summ}}</div>
+  <div class="cta">Enroll now at <br><span class="cta-highlight">beaconfi.com</span></div>
+  <div class="var-image-1"></div>
+  <hr class="line-1">
+</body>
+
+</html>
