@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.typekit.net/upf7led.css">
+    <title>4x6 Postcard Front</title>
+    <style>
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: "OpenSans-Bold";
+            src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Bold.ttf) format("truetype");
+        }
+
+        @font-face {
+            font-family: "OpenSans-Regular";
+            src: url(https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Document+fonts/OpenSans-Regular.ttf) format("truetype");
+        }
+
+        body {
+            width: 6.25in;
+            height: 4.25in;
+            margin: 0;
+            padding: 0;
+            /* If using an image, the background image should have dimensions of 1875x1275 pixels. */
+            background-size: 6.25in 4.25in;
+            background-repeat: no-repeat;
+        }
+
+        .var-image-1 {
+            position: absolute;
+            width: 2.0903in;
+            height: 1.4045in;
+            left: -0.0035in;
+            top: 0in;
+            object-fit: cover;
+        }
+
+        .var-image-2 {
+            position: absolute;
+            width: 2.0833in;
+            height: 1.4045in;
+            left: 2.0868in;
+            top: 0in;
+            object-fit: cover;
+        }
+
+        .var-image-3 {
+            position: absolute;
+            width: 2.0799in;
+            height: 1.4045in;
+            left: 4.1701in;
+            top: 0in;
+            object-fit: cover;
+        }
+
+        .header {
+            position: absolute;
+            width: 2.2135in;
+            height: .2769in;
+            left: .3015in;
+            top: 1.5299in;
+            font-family: "OpenSans-Bold";
+            font-size: 9pt;
+            line-height: 11pt;
+        }
+
+        .var-image-4 {
+            position: absolute;
+            width: 2.0903in;
+            height: 1.226in;
+            left: .3511in;
+            top: 1.9129in;
+            -webkit-transform: rotate(-9deg);
+            -moz-transform: rotate(-9deg);
+            -o-transform: rotate(-9deg);
+            -ms-transform: rotate(-9deg);
+            transform: rotate(-9deg);
+        }
+
+        .logo-image {
+            position: absolute;
+            width: .1444in;
+            height: .3732in;
+            left: .3965in;
+            top: 3.2762in;
+        }
+
+        .logo-text {
+            position: absolute;
+            width: .6231in;
+            height: .1985in;
+            left: .5584in;
+            top: 3.3633in;
+        }
+
+        .qr {
+            position: absolute;
+            width: .3895in;
+            height: .3895in;
+            left: 1.436in;
+            top: 3.2714in;
+        }
+
+        .cta {
+            position: absolute;
+            width: .785in;
+            height: .3539in;
+            left: 1.8667in;
+            top: 3.307in;
+            font-family: "Open Sans";
+            font-size: 7pt;
+            line-height: 8.4pt;
+        }
+
+        .text {
+            position: absolute;
+            width: 2.2255in;
+            height: .3275in;
+            left: .2895in;
+            top: 3.675in;
+            font-family: "Open Sans";
+            font-size: 5pt;
+            line-height: 6pt;
+        }
+
+        .postage {
+            position: absolute;
+            width: 3.2835in;
+            height: 2.375in;
+            left: 2.6911in;
+            top: 1.625in;
+        }
+
+        #safe-area {
+            position: absolute;
+            width: 5.875in;
+            height: 3.875in;
+            left: 0.1875in;
+            top: 0.1875in;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #ink-free {
+            position: absolute;
+            width: 3.2835in;
+            height: 2.375in;
+            left: 2.6911in;
+            top: 1.625in;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="safe-area">
+        <!-- All text should appear within the safe area. -->
+        <img class="var-image-1"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/sunset.jpg">
+        <img class="var-image-2"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/shopping.jpg">
+        <img class="var-image-3"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/friends.jpg">
+        <div class="header">{{lob_back_summ}}</div>
+        <img class="logo-image"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/lighthouse_logo.png">
+        <img class="logo-text"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/logo_text.png">
+        <img class="qr"
+            src="https://s3.us-west-2.amazonaws.com/public.lob.com/solutions/Lob_demo_postcard_conversion/Financial+Services+psc/4x6+Financial+Services+Postcard/Links/qr.png">
+        <div class="cta">Scan with<br> your phone<br> to apply!</div>
+        <div class="text">Pudam que istia conseque reces inus, es cum vellorum quod utae quiandis susciet vitiam re,
+            commolu ptataquiduci repudita num labo.</div>
+        <div class="postage"></div>
+    </div>
+</body>
+
+</html>

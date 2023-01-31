@@ -20,6 +20,10 @@
             color: black;
         }
 
+        .desc {
+            color: black;
+        }
+
         a {
             font-family: 'Helvetica Neue', sans-serif;
         }
@@ -87,13 +91,33 @@
             <div class="text-center text-white">
                 <title>AI text summarizers for postcards!</title>
             </div>
-            <h1 class="header">AI text summarizers for postcards!</h1>
+            <h1 class="header">AI text summarizers for postcards (v. 0.5)</h1>
             <p class="desc">
                 Type a sentence, click on the submit button and wait for your prediction.
             </p>
-            <form method="POST" onSubmit="return validate();" class="form">
-                <div class="form-div">
-                    <input type="text" name="url" class="form-control mr-2" />
+            <form method="POST" enctype="multipart/form-data" onSubmit="return validate();" class="form">
+                <div class="url-div">
+                    <label for="url" class="desc">Enter webpage URL: </label>
+                    <input type="text" id="url" name="url" class="form-control mr-2" />
+                    <input type="radio" id="dynchoice1" name="dyn" value="dyn" checked/>
+                    <label for="dynchoice1" class="desc">Dynamic page scraping (best for bigger sites)</label>
+                    <input type="radio" id="dynchoice2" name="dyn" value="notdyn"/>
+                    <label for="dynchoice2" class="desc">Basic page scraping (best for smaller sites)</label>
+                    <br /><br />
+                    <label for="front" class="desc">Postcard front HTML template file: </label>
+                    <input type="file" id="front" name="front" class="form-control mr-2" accept=".html"/>
+                    <br />
+                    <label for="back" class="desc">Postcard back HTML template file: </label>
+                    <input type="file" id="back" name="back" class="form-control mr-2" accept=".html"/>
+                    <br /><br />
+                    <label class="desc">Please select your preferred postcard size:</p>
+                    <input type="radio" id="sizechoice1" name="size" value="4x6" />
+                    <label for="sizechoice1" class="desc">4x6</label>
+                    <input type="radio" id="sizechoice2" name="size" value="6x9" checked/>
+                    <label for="sizechoice1" class="desc">6x9</label>
+                    <input type="radio" id="sizechoice3" name="size" value="6x11" />
+                    <label for="sizechoice1" class="desc">6x11</label>
+                    <br /><br />
                     <button type="submit" class="btn btn-outline-primary" onclick="this.form.submit();">
                         Submit
                     </button>

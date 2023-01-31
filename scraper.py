@@ -44,7 +44,10 @@ def parse_website(url: str, dyn: bool) -> str:
     elif dyn == "notdyn":
         result = requests.get(url)
         soup = BeautifulSoup(result.content, "lxml")
-        passage = soup.find_all('p')
-        return " ".join([elem.text for elem in passage])
+        passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6'])
+        result = " ".join(
+            [" ".join(elem.text.split()) for elem in passage]
+        )
+        return result
     else:
         return "Please define either \"dyn\" or \"notdyn\" verbatim."
