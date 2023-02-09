@@ -35,8 +35,16 @@ MAX_TOKEN_COUNTS = 4096
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+def clean_text(text):
+    pos = 0
+    for i, letter in enumerate(text):
+        if letter.isalnum():
+            pos = i
+            break
+    return text[pos:]
+
 def openai_summarizer(text, summaries, results):
-    openai_prompt = text + "\n\nTl;dr"
+    openai_prompt = text + "\n\nBrief summary for marketing/advertising."
     openai_summary = openai.Completion.create(
         model="text-davinci-002",
         prompt=openai_prompt,
@@ -47,7 +55,7 @@ def openai_summarizer(text, summaries, results):
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
-    results.append([summ["text"] for summ in openai_summary["choices"]])
+    results.append([clean_text(summ["text"]) for summ in openai_summary["choices"]])
 
 @app.route("/", methods=["GET"])
 def index():
@@ -62,13 +70,13 @@ def index_post():
     back_html = request.files["back"].read().decode("utf-8")
     logging.info(f"Scraping and parsing text from: {url} ...")
     passage = scraper.parse_website(url, dyn)
-    logging.info("Scraping and parsing complete.")
+    logging.info("Scraping and parsing COMPLETE.")
     logging.info("Creating freq_add summary ...")
     freq_summary = freq_add_summarizer(passage)
-    logging.info("Creating freq_add summary complete.")
+    logging.info("Creating freq_add summary COMPLETE.")
     logging.info("Creating tf_idf summary ...")
     tf_summary = tf_idf_summarizer(passage)
-    logging.info("Creating tf_idf summary complete.")
+    logging.info("Creating tf_idf summary COMPLETE.")
     logging.info("Creating OpenAI summaries ...")
     sentences = passage.split('.')
     values = {}
@@ -89,7 +97,7 @@ def index_post():
     for i, result in enumerate(results):
         values[f"openai_summ_group_{i}"] = result
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
-    logging.info("Creating OpenAI summaries complete.")
+    logging.info("Creating OpenAI summaries COMPLETE.")
     logging.info("Creating Lob postcard ...")
     lob_front_summ = ""
     lob_back_summ = ""
@@ -167,13 +175,13 @@ def summarize():
     num_openai_summ = int(request.form["summaries"])
     logging.info(f"Scraping and parsing text from: {url}")
     text = scraper.parse_website(url, dyn)
-    logging.info(f"Scraping and parsing complete.")
+    logging.info(f"Scraping and parsing COMPLETE.")
     logging.info("Creating freq_add summary ...")
     freq_summary = freq_add_summarizer(text)
-    logging.info("Creating freq_add summary complete.")
+    logging.info("Creating freq_add summary COMPLETE.")
     logging.info("Creating tf_idf summary ...")
     tf_summary = tf_idf_summarizer(text)
-    logging.info("Creating tf_idf summary complete.")
+    logging.info("Creating tf_idf summary COMPLETE.")
     logging.info("Creating OpenAI summaries ...")
     values = {}
     values['passage'] = text
@@ -196,7 +204,7 @@ def summarize():
     for i, result in enumerate(results):
         values[f"openai_summ_group_{i}"] = result
     openai_summaries = [value for key, value in values.items() if 'openai' in key.lower()]
-    logging.info("Creating OpenAI summaries complete.")
+    logging.info("Creating OpenAI summaries COMPLETE.")
     logging.info("Creating Lob postcard ...")
     lob_front_summ = ""
     lob_back_summ = ""

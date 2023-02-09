@@ -5,22 +5,6 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 TOKEN_LENGTH = 4
-MAX_TOKEN_COUNTS = 4096
-
-def prepare_prompts(text):
-    groups = []
-    tokens = text.split()
-    token_count = len(tokens)
-    if token_count > MAX_TOKEN_COUNTS:
-        split_factor = (token_count // MAX_TOKEN_COUNTS) + 1
-        group_size, remainder = divmod(token_count, split_factor)
-        for idx in range(split_factor):
-            left = idx * group_size + min(idx, remainder)
-            right = (idx + 1) * group_size + min(idx + 1, remainder)
-            groups.append(" ".join(tokens[left:right]))
-    else:
-        groups = [" ".join(tokens)]
-    return groups
 
 def parse_website(url: str, dyn: bool) -> str:
     if dyn == "dyn":
@@ -34,7 +18,7 @@ def parse_website(url: str, dyn: bool) -> str:
         driver.get(url)
         time.sleep(1)
         soup = BeautifulSoup(driver.page_source, "lxml")
-        passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6'])
+        passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6','th','td','div'])
         result = " ".join(
             [" ".join(elem.text.split()) for elem in passage]
         )
@@ -43,7 +27,7 @@ def parse_website(url: str, dyn: bool) -> str:
     elif dyn == "notdyn":
         result = requests.get(url)
         soup = BeautifulSoup(result.content, "lxml")
-        passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6'])
+        passage = soup.find_all(['p','h1','h2','h3','h4','h5','h6','th','td','div'])
         result = " ".join(
             [" ".join(elem.text.split()) for elem in passage]
         )
